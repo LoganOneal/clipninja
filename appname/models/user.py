@@ -10,6 +10,7 @@ from sqlalchemy_utils.types.encrypted.encrypted_type import FernetEngine
 from flask_dance.consumer.storage.sqla import OAuthConsumerMixin
 
 from appname.models import db, Model, ModelProxy, global_encryption_key_iv
+from appname.models.project import Project
 
 logger = logging.getLogger(__name__)
 
@@ -25,6 +26,7 @@ class User(Model, UserMixin):
     email_confirmed = db.Column(db.Boolean())
     user_api_key_hash = db.Column(db.String())
     billing_customer_id = db.Column(db.String())
+    projects = db.relationship('Project', backref='user')
 
     # Encrypted Secret (used for Two Factor Authentication)
     encrypted_totp_secret = db.Column(EncryptedType(db.String,

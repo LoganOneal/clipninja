@@ -1,0 +1,41 @@
+{% extends "tabler/dashboard_base.html" %}
+{% from "helpers/_formhelpers.html" import render_field %}
+
+{% block title %}appname Files{% endblock %}
+
+{% block body %}
+<div class="my-3 my-md-5">
+    <div class="container">
+        <div class="page-header">
+            <h1 class="page-title">
+                Upload Video Clip
+            </h1>
+        </div>
+        <div class="row">
+            <div class="col-12 col-md-4">
+                <div class="card">
+                    <div class="card-header">
+                            <h3 class="card-title">Add New File</h3>
+                    </div>
+                    <form role="form" enctype="multipart/form-data" action="{{ url_for('dashboard_upload.upload_clip') }}" method="post">
+                        <div class="card-body">
+                            {{ form.hidden_tag() }}
+                            {{ render_field(form.title) }}
+
+                            {{ render_field(form.attachment) }}
+
+                            {{ render_field(form.description) }}
+
+                        </div>
+                        <div class="card-footer text-left">
+                            <div class="d-flex">
+                                <button type="submit" class="btn btn-primary">Add</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
